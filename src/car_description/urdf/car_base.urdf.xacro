@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<robot name="carbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- 外观模型（visual）+ link + joint   纯模型不包含物理属性，方便在RViz中查看 -->
+    
+    <!-- 蓝色 --><material name="blue"><color rgba="0.2 0.3 0.8 1.0"/></material>
+    <!-- 黑色 --><material name="black"><color rgba="0.0 0.0 0.0 1.0"/></material>
+    <!-- 红色 --><material name="red"><color rgba="0.9 0.2 0.2 1.0"/></material>
+    <!-- 绿色 --><material name="green"><color rgba="0.2 0.8 0.3 1.0"/></material>
+    <!-- 黄色 --><material name="yellow"><color rgba="0.8 0.7 0.2 1.0"/></material>
+    <!-- 灰色 --><material name="gray"><color rgba="0.1 0.1 0.1 1.0"/></material>
+
+  <!-- base_footprint 虚拟坐标系，不用加物理属性 -->
+  <link name="base_footprint" />
+
+  <!-- 车身 -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/><!-- 前后   左右  上下 -->
+      <geometry>
+        <!-- 长方体：长 × 宽 × 高 -->
+        <box size="0.75 0.09 0.09"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <xacro:base_physics />
+  </link>
+    
+  <!-- 雷达 -->
+  <link name="laser_link">
+      <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.02" radius="0.02"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+    <xacro:lidar_physics />
+  </link>
+
+  <!-- 左前车轮 -->
+  <link name="left_front_wheel_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <cylinder radius="0.06" length="0.014"/> <!-- 实际车轮尺寸：直径0.095m，宽度0.014m -->
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <xacro:wheel_physics /> <!-- 添加物理属性 -->
+  </link>
+
+  <!-- 右前车轮 -->
+  <link name="right_front_wheel_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <cylinder radius="0.06" length="0.014"/> <!-- 实际车轮尺寸：直径0.095m，宽度0.014m  加直径为0.12m为了美观 -->
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <xacro:wheel_physics /> <!-- 添加物理属性 -->
+  </link>
+
+  <!-- 左后车轮 -->
+  <link name="left_back_wheel_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <cylinder radius="0.06" length="0.014"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <xacro:wheel_physics /> <!-- 添加物理属性 -->
+  </link>
+
+  <!-- 右后车轮 -->
+  <link name="right_back_wheel_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+          <cylinder radius="0.06" length="0.014"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <xacro:wheel_physics /> <!-- 添加物理属性 -->
+  </link>
+
+  <!-- imu link -->
+  <link name="imu_link">
+    <visual>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/>
+      <geometry>
+            <box size="0.02 0.02 0.02"/>
+      </geometry>
+    </visual>
+    <xacro:imu_physics />
+  </link>
+
+  <!-- 深度相机 link -->
+  <link name="depth_camera_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <!-- 相机外形：小长方体，尺寸可自行修改 -->
+      <geometry>
+        <box size="0.09 0.02 0.02"/>
+      </geometry>
+      <material name="yellow"/>
+    </visual>
+    <xacro:camera_physics />
+  </link>
+
+<!-- ==========================================
+                    关节
+    ==========================================-->
+
+
+  <!-- 虚拟和车身 joint -->
+  <joint name="footprint__base_joint" type="fixed">
+      <parent link="base_footprint" />
+      <child link="base_link" />
+      <origin xyz="0 0 0.06" />  <!-- 前后   左右  上下  等于轮子半径，刚好着地 -->
+  </joint>
+
+  <!-- 雷达和车身 joint -->
+  <joint name="base_laser_joint" type="fixed">
+      <parent link="base_link" />
+      <child link="laser_link" />
+      <origin xyz="0.35 0 0.055" />  <!-- 前后   左右  上下：车身高度/2+雷达高度-->
+  </joint>
+
+    <!-- 左前轮 -->
+  <joint name="left_front_wheel_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="left_front_wheel_link"/>
+      <origin xyz="0.25  0.052  0" rpy="1.5708 0 0"/>
+      <axis xyz="0 0 1" />  
+  </joint>
+
+  <!-- 右前轮 -->
+  <joint name="right_front_wheel_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="right_front_wheel_link"/>
+      <origin xyz="0.25 -0.052  0" rpy="1.5708 0 0"/>
+      <axis xyz="0 0 1" />    
+  </joint>
+
+  <!-- 左后轮 -->
+  <joint name="left_back_wheel_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="left_back_wheel_link"/>
+      <origin xyz="-0.25  0.052  0" rpy="1.5708 0 0"/>
+      <axis xyz="0 0 1" />  
+  </joint>
+
+  <!-- 右后轮 -->
+  <joint name="right_back_wheel_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="right_back_wheel_link"/>
+      <origin xyz="-0.25 -0.052  0" rpy="1.5708 0 0"/>
+      <axis xyz="0 0 1" />  
+  </joint>
+
+  <!-- imu joint -->
+  <joint name="imu_joint" type="fixed">
+      <parent link="base_link" />
+      <child link="imu_link" />
+      <origin xyz="0 0 0.02" />
+  </joint>
+
+  <!-- 深度相机 固定关节，安装在车头最前端 -->
+<joint name="depth_camera_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="depth_camera_link"/>
+  <!-- x=0.375 车身总长0.75/2+相机厚度0.02/2；y=0居中；z=0.02 安装在车身前部下方 -->
+  <origin xyz="0.385 0 0.02" rpy="0 0 1.57"/>
+</joint>
+
+</robot>

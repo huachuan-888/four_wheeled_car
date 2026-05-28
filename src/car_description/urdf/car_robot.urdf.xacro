@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot name="carbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- 顺序必须是：物理 → 模型 → gazebo -->
+  <xacro:include filename="car_physics.xacro"/>
+  <xacro:include filename="car_base.urdf.xacro"/>
+  <xacro:include filename="car.gazebo.xacro"/>
+
+  <xacro:car_gazebo/>
+
+</robot>
