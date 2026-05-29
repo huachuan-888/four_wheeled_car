@@ -119,7 +119,7 @@
   <joint name="footprint__base_joint" type="fixed">
       <parent link="base_footprint" />
       <child link="base_link" />
-      <origin xyz="0 0 0.06" />  <!-- 前后   左右  上下  等于轮子半径，刚好着地 -->
+      <origin xyz="0 0 0.09" />  <!-- 前后   左右  上下   -->
   </joint>
 
   <!-- 雷达和车身 joint -->
@@ -133,7 +133,8 @@
   <joint name="left_front_wheel_joint" type="continuous">
       <parent link="base_link"/>
       <child link="left_front_wheel_link"/>
-      <origin xyz="0.25  0.052  0" rpy="1.5708 0 0"/>
+      <!-- 关键改动：z轴从0改为-0.03，让轮胎整体下移3cm -->
+      <origin xyz="0.25  0.052  -0.03" rpy="1.5708 0 0"/>
       <axis xyz="0 0 -1" />  
   </joint>
 
@@ -141,7 +142,8 @@
   <joint name="right_front_wheel_joint" type="continuous">
       <parent link="base_link"/>
       <child link="right_front_wheel_link"/>
-      <origin xyz="0.25 -0.052  0" rpy="1.5708 0 0"/>
+      <!-- 关键改动：z轴从0改为-0.03，让轮胎整体下移3cm -->
+      <origin xyz="0.25 -0.052  -0.03" rpy="1.5708 0 0"/>
       <axis xyz="0 0 -1" />    
   </joint>
 
@@ -149,7 +151,8 @@
   <joint name="left_back_wheel_joint" type="continuous">
       <parent link="base_link"/>
       <child link="left_back_wheel_link"/>
-      <origin xyz="-0.25  0.052  0" rpy="1.5708 0 0"/>
+      <!-- 关键改动：z轴从0改为-0.03，让轮胎整体下移3cm -->
+      <origin xyz="-0.25  0.052  -0.03" rpy="1.5708 0 0"/>
       <axis xyz="0 0 -1" />  
   </joint>
 
@@ -157,7 +160,8 @@
   <joint name="right_back_wheel_joint" type="continuous">
       <parent link="base_link"/>
       <child link="right_back_wheel_link"/>
-      <origin xyz="-0.25 -0.052  0" rpy="1.5708 0 0"/>
+      <!-- 关键改动：z轴从0改为-0.03，让轮胎整体下移3cm -->
+      <origin xyz="-0.25 -0.052  -0.03" rpy="1.5708 0 0"/>
       <axis xyz="0 0 -1" />  
   </joint>
 
