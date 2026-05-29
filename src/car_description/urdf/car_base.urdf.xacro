@@ -134,7 +134,7 @@
       <parent link="base_link"/>
       <child link="left_front_wheel_link"/>
       <origin xyz="0.25  0.052  0" rpy="1.5708 0 0"/>
-      <axis xyz="0 0 1" />  
+      <axis xyz="0 0 -1" />  
   </joint>
 
   <!-- 右前轮 -->
@@ -142,7 +142,7 @@
       <parent link="base_link"/>
       <child link="right_front_wheel_link"/>
       <origin xyz="0.25 -0.052  0" rpy="1.5708 0 0"/>
-      <axis xyz="0 0 1" />    
+      <axis xyz="0 0 -1" />    
   </joint>
 
   <!-- 左后轮 -->
@@ -150,7 +150,7 @@
       <parent link="base_link"/>
       <child link="left_back_wheel_link"/>
       <origin xyz="-0.25  0.052  0" rpy="1.5708 0 0"/>
-      <axis xyz="0 0 1" />  
+      <axis xyz="0 0 -1" />  
   </joint>
 
   <!-- 右后轮 -->
@@ -158,7 +158,7 @@
       <parent link="base_link"/>
       <child link="right_back_wheel_link"/>
       <origin xyz="-0.25 -0.052  0" rpy="1.5708 0 0"/>
-      <axis xyz="0 0 1" />  
+      <axis xyz="0 0 -1" />  
   </joint>
 
   <!-- imu joint -->
