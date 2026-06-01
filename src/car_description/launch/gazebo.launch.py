@@ -18,7 +18,7 @@ def generate_launch_description():
     urdf_path = os.path.join(pkg_share, f'urdf/{urdf_name}')
     robot_description = Command(['xacro ', urdf_path])
     # RViz 配置文件路径（新增）
-    rviz_config_path = os.path.join(pkg_share, 'rviz/tf_rviz.rviz')
+    rviz_config_path = os.path.join(pkg_share, 'rviz/ld_depth.rviz')
 
 
     # 1. 启动 Gazebo 空环境

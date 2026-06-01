@@ -103,7 +103,7 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <!-- 相机外形：小长方体，尺寸可自行修改 -->
       <geometry>
-        <box size="0.09 0.02 0.02"/>
+        <box size="0.02 0.09 0.02"/>
       </geometry>
       <material name="yellow"/>
     </visual>
@@ -177,7 +177,15 @@
   <parent link="base_link"/>
   <child link="depth_camera_link"/>
   <!-- x=0.375 车身总长0.75/2+相机厚度0.02/2；y=0居中；z=0.02 安装在车身前部下方 -->
-  <origin xyz="0.385 0 0.02" rpy="0 0 1.57"/>
+  <origin xyz="0.42 0 0.02" rpy="0 0 0"/>
+</joint>
+ <!-- 深度相机 虚拟坐标-->
+<link name="camera_color_optical_frame" />
+
+<joint name="camera_optical_joint" type="fixed">
+  <parent link="depth_camera_link"/>
+  <child link="camera_color_optical_frame"/>
+  <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
 </joint>
 
 </robot>
