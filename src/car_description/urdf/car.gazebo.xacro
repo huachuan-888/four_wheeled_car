@@ -84,12 +84,12 @@
       <wheel_separation>0.104</wheel_separation>
       <wheel_diameter>0.12</wheel_diameter>
       <wheel_separation_multiplier>1.0</wheel_separation_multiplier>
-      <wheel_radius_multiplier>1.0</wheel_radius_multiplier>
+      <wheel_radius_multiplier>-1.0</wheel_radius_multiplier>
       <!-- 运动限制 -->
       <max_wheel_torque>20.0</max_wheel_torque>
-      <max_wheel_acceleration>5.0</max_wheel_acceleration>
-      <max_linear_speed>1.0</max_linear_speed>
-      <max_angular_speed>2.0</max_angular_speed>
+      <max_wheel_acceleration>50.0</max_wheel_acceleration><!-- 原来5.0→加速限制 -->
+      <max_linear_speed>1.8</max_linear_speed> <!-- 原本1.0 直行最大m/s-->
+      <max_angular_speed>3.0</max_angular_speed> <!-- 原来2.0→转弯最大rad/s -->
       <!-- 里程计 & TF 发布 -->
       <publish_odom>true</publish_odom>
       <publish_odom_tf>true</publish_odom_tf>
@@ -195,7 +195,7 @@
   <gazebo reference="laser_link">
     <sensor name="laser_sensor" type="ray">
       <always_on>true</always_on>
-      <visualize>true</visualize>
+      <visualize>false</visualize>
       <!-- 刷新频率改为10Hz，满足导航/SLAM需求 -->
       <update_rate>10</update_rate>
 

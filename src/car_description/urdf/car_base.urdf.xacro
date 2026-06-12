@@ -134,8 +134,8 @@
       <parent link="base_link"/>
       <child link="left_front_wheel_link"/>
       <!-- 关键改动：z轴从0改为-0.03，让轮胎整体下移3cm -->
-      <origin xyz="0.25  0.052  -0.03" rpy="1.5708 0 0"/>
-      <axis xyz="0 0 -1" />  
+      <origin xyz="0.25  0.052  -0.03" rpy="-1.5708 0 0"/>
+      <axis xyz="0 0 1" />  
   </joint>
 
   <!-- 右前轮 -->
@@ -143,8 +143,8 @@
       <parent link="base_link"/>
       <child link="right_front_wheel_link"/>
       <!-- 关键改动：z轴从0改为-0.03，让轮胎整体下移3cm -->
-      <origin xyz="0.25 -0.052  -0.03" rpy="1.5708 0 0"/>
-      <axis xyz="0 0 -1" />    
+      <origin xyz="0.25 -0.052  -0.03" rpy="-1.5708 0 0"/>
+      <axis xyz="0 0 1" />    
   </joint>
 
   <!-- 左后轮 -->
@@ -152,8 +152,8 @@
       <parent link="base_link"/>
       <child link="left_back_wheel_link"/>
       <!-- 关键改动：z轴从0改为-0.03，让轮胎整体下移3cm -->
-      <origin xyz="-0.25  0.052  -0.03" rpy="1.5708 0 0"/>
-      <axis xyz="0 0 -1" />  
+      <origin xyz="-0.25  0.052  -0.03" rpy="-1.5708 0 0"/>
+      <axis xyz="0 0 1" />  
   </joint>
 
   <!-- 右后轮 -->
@@ -161,15 +161,15 @@
       <parent link="base_link"/>
       <child link="right_back_wheel_link"/>
       <!-- 关键改动：z轴从0改为-0.03，让轮胎整体下移3cm -->
-      <origin xyz="-0.25 -0.052  -0.03" rpy="1.5708 0 0"/>
-      <axis xyz="0 0 -1" />  
+      <origin xyz="-0.25 -0.052  -0.03" rpy="-1.5708 0 0"/>
+      <axis xyz="0 0 1" />  
   </joint>
 
   <!-- imu joint -->
   <joint name="imu_joint" type="fixed">
       <parent link="base_link" />
       <child link="imu_link" />
-      <origin xyz="0 0 0.02" />
+      <origin xyz="0 0 0" />
   </joint>
 
   <!-- 深度相机 固定关节，安装在车头最前端 -->

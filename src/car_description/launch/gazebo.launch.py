@@ -19,11 +19,13 @@ def generate_launch_description():
     robot_description = Command(['xacro ', urdf_path])
     # RViz 配置文件路径（新增）
     rviz_config_path = os.path.join(pkg_share, 'rviz/ld_depth.rviz')
+    # 自定义world路径 hello1.world
+    world_file = os.path.join(pkg_share, 'world/hello2.world')
 
 
     # 1. 启动 Gazebo 空环境
     gazebo_node = ExecuteProcess(
-        cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_factory.so'],
+        cmd=['gazebo', '--verbose', world_file,'-s', 'libgazebo_ros_factory.so'],
         output='screen'
     )
 
@@ -49,7 +51,7 @@ def generate_launch_description():
         package='rviz2',
         executable='rviz2',
         name='rviz2',
-        arguments=['-d', rviz_config_path],  # 自动加载你的 tf_rviz.rviz
+        arguments=['-d', rviz_config_path],  # 自动加载你的 rviz
         output='screen',
         parameters=[{'use_sim_time': True}]
     )
@@ -81,6 +83,6 @@ def generate_launch_description():
             on_start=[TimerAction(period=1.0, actions=[rviz_node])]
         )
     )
-    ld.add_action(rviz_after_spawn)
+    # ld.add_action(rviz_after_spawn)  # 在使用nav时 不需要启动
 
     return ld
